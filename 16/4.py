@@ -11,3 +11,4 @@ def g(n):
     return g(n-2) + 1
 
 print(f(15548))
+
