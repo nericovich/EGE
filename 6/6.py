@@ -1,19 +1,19 @@
-from turtle import *
-tracer(0)
-k=20
-screensize(2000, 2000)
-rt(315)
-for _ in range(7):
-    fd(7*k)
-    rt(45)
-    fd(8*k)
-    rt(135)
+from functools import lru_cache
 
+@lru_cache(None)
+def f(x):
+    if x == 150:
+        return 1
+    if x > 150:
+        return 0
 
-up()
-for x in range(-30,40):
-    for y in range(-30,30):
-        goto(x*k,y*k)
-        dot(4,"red")
-update()
-done()
+    ans = f(x + 1)  # команда A
+
+    s = str(x)
+    if int(s[1]) < int(s[2]):  # команда B разрешена
+        y = int(s[0] + s[2] + s[1])
+        ans += f(y)
+
+    return ans
+
+print(f(100))
